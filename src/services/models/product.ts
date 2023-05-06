@@ -5,6 +5,7 @@ export interface IProduct {
   name: string;
   image: string;
   price: number;
+  description: string;
   isAddCart?: boolean;
   categoria?: string | ICategory;
 }

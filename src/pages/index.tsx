@@ -1,4 +1,5 @@
 import {View, Text} from 'react-native'
+import { StatusBar } from 'expo-status-bar'
 import { MainLayout } from '../components/layouts/main.layout'
 import {Routes, Route}  from 'react-router-native'
 import Products from '../components/features/products'
@@ -8,14 +9,17 @@ import { RepositoryIocProvider } from '../services/config/context'
 export const IndexPage = () => {
 
   return (
-    <RepositoryIocProvider>
-      <MainLayout>
-        <Routes>
-          <Route path={'/'} element={<Products />} />
-          <Route path={'/card-shop'} element={<CardShop />} />
-        </Routes>
-      </MainLayout>
-    </RepositoryIocProvider>
+    <>
+      <StatusBar style='dark' />
+      <RepositoryIocProvider>
+        <MainLayout>
+          <Routes>
+            <Route path={'/'} element={<Products />} />
+            <Route path={'/card-shop'} element={<CardShop />} />
+          </Routes>
+        </MainLayout>
+      </RepositoryIocProvider>
+    </>
   )
 }
 

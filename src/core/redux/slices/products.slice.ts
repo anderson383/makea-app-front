@@ -1,3 +1,4 @@
+import { loadProducts } from './../actions/products.actions';
 import { createSlice } from "@reduxjs/toolkit"
 import { IProductState } from "../models/products"
 import {updateProductCar} from '../actions/products.actions'
@@ -10,10 +11,12 @@ export const productsSlice = createSlice({
   name: 'products',
   initialState: INITIAL_STATE,
   reducers: {
-    updateProductCar
+    updateProductCar,
+    loadProducts
   }
 })
 
 export const {
-  updateProductCar: updateProductCarSlice
+  updateProductCar: updateProductCarSlice,
+  loadProducts: loadProductsSlice
 } = productsSlice.actions;

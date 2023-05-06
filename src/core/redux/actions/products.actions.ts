@@ -4,11 +4,9 @@ import { IProductState } from "../models/products"
 import {PayloadAction} from '@reduxjs/toolkit'
 
 export const updateProductCar = (state:IProductState, { payload }: PayloadAction<IProduct>) => {
-  const existProd = state.products.find(prod => prod.id === payload.id)
+  state.products = state.products.map(prodItem=> prodItem.id === payload.id ? {...prodItem, isAddCart: !prodItem.isAddCart} : prodItem)
+}
 
-  if (existProd) {
-    state.products = state.products.filter(prod => prod.id !== payload.id)
-  } else {
-    state.products = [...state.products, payload]
-  }
+export const loadProducts = (state:IProductState, {payload }:PayloadAction<IProduct[]>) => {
+  state.products = payload
 }
