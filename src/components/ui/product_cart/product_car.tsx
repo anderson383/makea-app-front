@@ -27,8 +27,8 @@ const ProductCar:React.FC<ProductCarProps> = ({product}) => {
       </View>
       <Image source={{ uri: product.image, width: 87, height: 87 }} style={{borderRadius: 8, overflow: 'hidden'}} />
       <View style={{flex: 1}}>
-        <Text style={styles.text}>{product.name}</Text>
-        <Text>{product.description}</Text>
+        <Text numberOfLines={2} style={styles.text}>{product.name}</Text>
+        <Text numberOfLines={2}>{product.description}</Text>
       </View>
       <Text style={styles.price}>{numberFormat(product.price)}</Text>
     </View>

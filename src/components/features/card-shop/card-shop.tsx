@@ -1,24 +1,33 @@
 import { View, ScrollView, StyleSheet, Text, Image, Button, TouchableOpacity } from "react-native"
 import Constants from 'expo-constants'
 import Header from "../../ui/header/header"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { IrootState } from "../../../core/redux/models/root"
 import { IProduct } from "@/src/services/models/product"
 import { THEME } from "../../../theme"
 import { numberFormat } from "../../../helpers/numberCurrency"
 import { useEffect, useState } from "react"
 import ProductCar from "../../ui/product_cart/product_car"
+import { StyledButton } from "../../ui/button/button"
+import { loadProductsSlice } from "../../../core/redux/slices/products.slice";
 
-
+import {useNavigate} from 'react-router-native'
 const CardShop = () => {
+
   
-  const products = useSelector<IrootState, IProduct[]>(state => (state.product.products)).filter(pro=> (pro.isAddCart))
+  const dispatch = useDispatch()
+
+  const navigate = useNavigate()
+  const products = useSelector<IrootState, IProduct[]>(state => (state.product.products))
   const [totalPrice, serTotalPrice] = useState(0)
   useEffect(() => {
     serTotalPrice(products.reduce((prev, curr) => (curr.price + prev), 0))
   }, [products])
 
- 
+  const continueBuying = () => {
+    dispatch(loadProductsSlice([]))
+    navigate('/success-pay')
+  }
 
   return (
     <View style={styles.card_shop}>
@@ -37,9 +46,7 @@ const CardShop = () => {
                    style={styles.price_total}>{numberFormat(totalPrice)}</Text>
                 </View>
                 <View style={{flex: 1}}>
-                  <TouchableOpacity style={styles.button}>
-                    <Text style={{color: THEME.colors.white, fontWeight: 'bold'}}>Pagar</Text>
-                  </TouchableOpacity>
+                  <StyledButton text="Pagar ahora" onPress={continueBuying}/>
                 </View>
               </View>
             </>
@@ -75,13 +82,6 @@ const styles = StyleSheet.create({
   info_pay: { 
     marginTop: THEME.margins.md,
     flexDirection: 'row'
-  },
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: THEME.colors.secondaryColor,
-    borderRadius: 8,
-    height: 62
   }
 })
 

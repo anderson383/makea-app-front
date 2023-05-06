@@ -7,34 +7,28 @@ import {HeartIcon, HeartIconActive} from "../../../../assets/icons/heart";
 
 interface ProductProps {
   product: IProduct
-  onClickHeart?: () => void
+  onClickHeart?: () => void;
+  onClickCard?: () => void;
 }
 
-const Product:React.FC<ProductProps> = ({product, onClickHeart}) => {
-
-  const onClick = () => {
-
-  }
-
+const Product:React.FC<ProductProps> = ({product, onClickHeart, onClickCard}) => {
   return (
-    
       <View style={styles.product} key={product.id}>
-
-<TouchableOpacity>
-        <View style={{flex: 1}}>
-          <Image source={{ uri: product.image, height: 150 }} style={{width: '100%'}} />
-        </View>
-        <View style={styles.info} >
-          <View style={styles.priceContent}>
-            <Text style={styles.price}>{numberFormat(product.price)}</Text>
-            <TouchableOpacity  onPress={onClickHeart && onClickHeart}>
-              { product.isAddCart ?  <SvgXml  xml={HeartIconActive()}  /> : <SvgXml  xml={HeartIcon()}  />} 
-            </TouchableOpacity>
+        <TouchableOpacity onPress={onClickCard && onClickCard}>
+          <View style={{flex: 1}}>
+            <Image source={{ uri: product.image, height: 150 }} style={{width: '100%'}} />
           </View>
-          <View>
-          <Text>{product.name}</Text>
+          <View style={styles.info} >
+            <View style={styles.priceContent}>
+              <Text style={styles.price}>{numberFormat(product.price)}</Text>
+              <TouchableOpacity  onPress={onClickHeart && onClickHeart}>
+                { product.isAddCart ?  <SvgXml  xml={HeartIconActive()}  /> : <SvgXml  xml={HeartIcon()}  />} 
+              </TouchableOpacity>
+            </View>
+            <View>
+            <Text>{product.name}</Text>
+            </View>
           </View>
-        </View>
         </TouchableOpacity>
       </View>
    

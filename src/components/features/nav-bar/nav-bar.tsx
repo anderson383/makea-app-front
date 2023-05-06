@@ -8,6 +8,7 @@ import { THEME } from "../../../theme";
 import { IProduct } from "../../../services/models/product";
 import { IrootState } from "../../../core/redux/models/root";
 import { useSelector } from "react-redux";
+import { EatIcon } from "../../../../assets/icons/eat";
 interface LinkNavProps {
   children?: React.ReactNode,
   to: string,
@@ -36,18 +37,18 @@ const LinkNav:React.FC<LinkNavProps> = ({children, to, icon }) => {
 }
 
 const NavBar = () => {
-  const products = useSelector<IrootState, IProduct[]>(state => (state.product.products)).filter(pro=> (pro.isAddCart))
+  const products = useSelector<IrootState, IProduct[]>(state => (state.product.products))
   return (
     <>
       <View style={styles.navBar}>
         <View style={styles.links}>
           <LinkNav to="/" icon={HomeIcon} />
+          <LinkNav to="/home-life"  icon={EatIcon} />
           <LinkNav to="/card-shop"  icon={StoreIcon}>
             {
               products.length > 0 && <View style={styles.counter} />
             }
           </LinkNav>
-          <LinkNav to="/"  icon={StoreIcon} />
         </View>
       </View>
     </>
@@ -57,7 +58,6 @@ const NavBar = () => {
 const styles = StyleSheet.create({
   navBar: {
     backgroundColor: '#ffffff',
-    marginBottom: 16,
     marginHorizontal: 16,
     height: 80,
     borderRadius: 8,

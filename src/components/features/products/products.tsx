@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, FlatList, ScrollView, Image } from "react-native"
 import Constants from 'expo-constants'
 import useProductsRepository from "../../../hooks/repositories/useProductsRepository"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { IProduct } from "../../../services/models/product";
 import { THEME } from "./../../../theme";
 import Product from "../../ui/product";
@@ -9,31 +9,39 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadProductsSlice, updateProductCarSlice } from "../../../core/redux/slices/products.slice";
 import Header from "../../ui/header";
 import { IrootState } from "../../../core/redux/models/root";
+import { useNavigate } from "react-router-native";
 
+interface ProductsProps {
+  title: string,
+  code: string
+}
 
-const Products = () => {
+const Products:React.FC<ProductsProps> = ({title, code}) => {
+  const navigation = useNavigate()
   const dispatch = useDispatch()
-  const products = useSelector<IrootState, IProduct[]>(state => (state.product.products))
+  const productsStore = useSelector<IrootState, IProduct[]>(state => (state.product.products))
+  const [products, setProducts] = useState<IProduct[]>([])
   const repository = useProductsRepository()
 
   useEffect(() => {
-    repository.list().then(respProd => {
-      dispatch(
-        loadProductsSlice(
-          respProd.map(item => products.find(cart => (item.id === cart.id)) || item)
-        )
-      )
+    repository.list(code).then(respProd => {
+      setProducts( respProd.map(item => productsStore.find(cart => (item.id === cart.id)) || item))
     })
-  }, [])
+  }, [code])
 
   const addCart = (prod: IProduct) => {
-    dispatch(updateProductCarSlice({...prod, isAddCart: !prod.isAddCart}))
+    const updateProd = {...prod, isAddCart: !prod.isAddCart }
+    
+    setProducts((lastState) => (lastState.map(prodItem => prodItem.id === prod.id ? updateProd : prodItem) ))
+    dispatch(updateProductCarSlice(updateProd))
   }
+
+  const redirectDetail = (id:string) => navigation('/detail/' + id)
 
   return (
     <>
       <View style={styles.products}>
-        <Header title="Catalogo" />
+        <Header title={title}/>
         <ScrollView >
           <View style={styles.list}>
           {
@@ -42,6 +50,7 @@ const Products = () => {
                 key={product.id}
                 product={product}
                 onClickHeart={() => addCart(product)}
+                onClickCard={() => redirectDetail(product.id)}
               />
             ))
           }
@@ -64,29 +73,6 @@ const styles = StyleSheet.create({
     gap: THEME.paddings.sm,
     paddingHorizontal: THEME.paddings.md
   },
-  product: {
-    marginRight: 3,
-    borderRadius: 10,
-    width: '100%',
-    maxWidth: 172,
-    overflow: 'hidden',
-    borderColor: '#f1f1f1',
-    borderWidth: 1,
-  },
-  info: {
-    padding: 8,
-    position: 'relative',
-    gap: THEME.paddings.sm
-    // backgroundColor: 'white'
-  },
-  priceContent: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  price: {
-    color: THEME.colors.secondaryColor,
-    fontWeight: 'bold'
-  }
 })
 
 export default Products
