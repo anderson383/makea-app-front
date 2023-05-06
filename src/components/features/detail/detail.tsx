@@ -11,7 +11,6 @@ import { HeartIcon, HeartIconActive } from "../../../../assets/icons/heart"
 import { updateProductCarSlice } from "../../../core/redux/slices/products.slice"
 import { useDispatch, useSelector } from "react-redux"
 import { IrootState } from "../../../core/redux/models/root"
-import { ArrowBackIcon } from "../../../../assets/icons/arrow-back"
 
 export const DetailProduct = () => {
   const repository = useProductsRepository()

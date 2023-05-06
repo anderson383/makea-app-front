@@ -16,7 +16,6 @@ interface LinkNavProps {
 }
 
 const LinkNav:React.FC<LinkNavProps> = ({children, to, icon }) => {
-  
   const  {pathname} = useLocation()
   const active = pathname === to
   const textStyles = [
@@ -73,7 +72,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     gap: 16,
   },
-  
   link: {
     padding: 16,
     position: 'relative',

@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES6",
     "lib": [
       "dom",
       "dom.iterable",
       "esnext",
       "es6"
     ],
+    "types": ["reflect-metadata", "jest"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -17,7 +18,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "strictNullChecks": false,
@@ -30,14 +31,10 @@
     "incremental": true
   },
   "include": [
-    "next-env.d.ts",
     "svg/custom.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "jest.config.js",
-    "components/features/factory/factory.js",
-    "components/features/factory/transform-field.js",
-    "components/features/factory/index.js"
+    "jest.config.js"
   ],
   "exclude": [
     "node_modules"

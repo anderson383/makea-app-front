@@ -5,7 +5,6 @@ import { ProductsRepository } from '../../services/repositories/products.reposit
 
 const useProductsRepository = () : ProductsRepository => {
   const { container } = useRepositoryIoc();
-
   return container.get(TYPES.PRODUCTS_REPOSITORY);
 };
 
