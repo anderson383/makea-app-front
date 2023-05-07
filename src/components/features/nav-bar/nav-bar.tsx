@@ -1,7 +1,5 @@
 
 import { View, Text, StyleSheet, Image, TouchableWithoutFeedback, TouchableOpacity } from "react-native"
-import { Link, useLocation } from 'react-router-native'
-import { SvgXml } from 'react-native-svg';
 import HomeIcon from "../../../../assets/icons/home";
 import StoreIcon from "../../../../assets/icons/store";
 import { THEME } from "../../../theme";
@@ -9,31 +7,8 @@ import { IProduct } from "../../../services/models/product";
 import { IrootState } from "../../../core/redux/models/root";
 import { useSelector } from "react-redux";
 import { EatIcon } from "../../../../assets/icons/eat";
-interface LinkNavProps {
-  children?: React.ReactNode,
-  to: string,
-  icon: (color?:string) => string
-}
+import LinkNav from "../../ui/link";
 
-const LinkNav:React.FC<LinkNavProps> = ({children, to, icon }) => {
-  const  {pathname} = useLocation()
-  const active = pathname === to
-  const textStyles = [
-    styles.link,
-  ]
-  return (
-    <TouchableOpacity>
-      <Link to={to} style={textStyles} underlayColor={'#ffffff0'}>
-        <>
-          {children}
-          <Text>
-            <SvgXml height={23} width={23}  xml={icon(active ? THEME.colors.secondaryColor : undefined)} />
-          </Text>
-        </>
-      </Link>
-    </TouchableOpacity>
-  )
-}
 
 const NavBar = () => {
   const products = useSelector<IrootState, IProduct[]>(state => (state.product.products))
@@ -71,10 +46,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     gap: 16,
-  },
-  link: {
-    padding: 16,
-    position: 'relative',
   },
   counter: {
     top: 5,

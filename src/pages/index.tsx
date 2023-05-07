@@ -1,6 +1,6 @@
 import {View, Text} from 'react-native'
 import { StatusBar } from 'expo-status-bar'
-import { MainLayout } from '../components/layouts/main.layout'
+import { MainLayout } from '../layouts/main.layout'
 import {Routes, Route}  from 'react-router-native'
 import Products from '../components/features/products'
 import CardShop from '../components/features/card-shop'

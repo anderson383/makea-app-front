@@ -7,21 +7,21 @@ import { useDispatch } from "react-redux"
 import { updateProductCarSlice } from "../../../core/redux/slices/products.slice"
 import { THEME } from "../../../theme"
 
-interface ProductCarProps {
+export interface ProductCarProps {
   product: IProduct
 }
 
 const ProductCar:React.FC<ProductCarProps> = ({product}) => {
 
   const dispatch = useDispatch()
-  const addCart = (prod: IProduct) => {
+  const deleteItemCard = (prod: IProduct) => {
     dispatch(updateProductCarSlice({...prod, isAddCart: !prod.isAddCart}))
   }
 
   return (
     <View key={product.id} style={styles.product_cart}>
       <View style={styles.closed}>
-        <TouchableOpacity onPress={() => addCart(product)}>
+        <TouchableOpacity onPress={() => deleteItemCard(product)} testID="deleteItem">
           <SvgXml xml={CloseIcon}  />
         </TouchableOpacity>
       </View>

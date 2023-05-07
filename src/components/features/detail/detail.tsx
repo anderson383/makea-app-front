@@ -42,7 +42,7 @@ export const DetailProduct = () => {
           </View>
           <View style={styles.container} >
             <View style={styles.info}>
-              <TouchableOpacity  onPress={addCart}>
+              <TouchableOpacity  onPress={addCart} testID="addCart">
                 <View style={styles.iconHeart}>
                   { product.isAddCart ? <SvgXml xml={HeartIconActive() } /> : <SvgXml xml={HeartIcon()} /> }
                 </View>

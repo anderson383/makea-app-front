@@ -3,7 +3,7 @@ import SearchIcon from '../../../../assets/icons/search'
 import { THEME } from '../../../theme'
 import { View, Text, StyleSheet } from 'react-native' 
 
-interface HeaderProps {
+export interface HeaderProps {
   title: string
 }
 const Header:React.FC<HeaderProps> = ({title}) => {

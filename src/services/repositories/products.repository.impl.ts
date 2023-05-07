@@ -1,4 +1,4 @@
-import axiosIntance from '../config/axios-config';
+import axiosIntance from '../../core/axios-config';
 import { IProduct } from '../models/product';
 import { ProductsRepository } from './products.repository';
 import {injectable} from 'inversify'

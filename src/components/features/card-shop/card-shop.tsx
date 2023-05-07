@@ -8,7 +8,7 @@ import { THEME } from "../../../theme"
 import { numberFormat } from "../../../helpers/numberCurrency"
 import { useEffect, useState } from "react"
 import ProductCar from "../../ui/product_cart/product_car"
-import { StyledButton } from "../../ui/button/button"
+import StyledButton from "../../ui/button/button"
 import { loadProductsSlice } from "../../../core/redux/slices/products.slice";
 
 import {useNavigate} from 'react-router-native'
@@ -46,7 +46,7 @@ const CardShop = () => {
                    style={styles.price_total}>{numberFormat(totalPrice)}</Text>
                 </View>
                 <View style={{flex: 1}}>
-                  <StyledButton text="Pagar ahora" onPress={continueBuying}/>
+                  <StyledButton text="Pagar ahora" onPress={continueBuying} testID="buttonBuy" />
                 </View>
               </View>
             </>

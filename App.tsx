@@ -5,7 +5,7 @@ import { IndexPage } from './src/pages';
 import store from './src/core/redux/store';
 import * as SplashScreen from 'expo-splash-screen';
 import { useCallback, useEffect, useState } from 'react';
-import { SplashCustomScreen } from './src/components/layouts/splash-screen';
+import { SplashCustomScreen } from './src/layouts/splash-screen';
 import { THEME } from './src/theme';
 
 export default function App() {

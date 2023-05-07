@@ -2,7 +2,7 @@ import { THEME } from "../../../theme"
 import { SuccessIcon } from "../../../../assets/icons/success"
 import { View, StyleSheet, Text } from "react-native"
 import { SvgXml } from "react-native-svg"
-import { StyledButton } from "../../ui/button/button"
+import StyledButton from "../../ui/button"
 import { useNavigate } from "react-router-native"  
 
 const SuccessPay = () => {
@@ -16,7 +16,7 @@ const SuccessPay = () => {
           Tu orden será entregada en los proximos 5 dias, mas detalles del rastreo del pedido por correo.
           Gracias por tu compra! :)
         </Text>
-        <StyledButton text="Continuar comprando"  style={styles.button} onPress={() => navigate('/')}/>
+        <StyledButton testID="styledButton" text="Continuar comprando"  style={styles.button} onPress={() => navigate('/')}/>
       </View>
     </View>
   )

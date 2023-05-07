@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     flex: 1,
+    width: '100%',
     gap: THEME.paddings.sm,
     paddingHorizontal: THEME.paddings.md
   },

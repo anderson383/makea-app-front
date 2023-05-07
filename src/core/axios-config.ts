@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosIntance = axios.create({
-  baseURL: 'http://192.168.0.8:4000/api',
+  baseURL: 'https://makea-backend-production.up.railway.app/api',
   headers: {
     Accept: 'application/json',
     'Accept-Language': 'es-CO',
