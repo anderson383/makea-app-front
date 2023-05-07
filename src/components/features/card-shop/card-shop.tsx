@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { IrootState } from "../../../core/redux/models/root"
 import { IProduct } from "@/src/services/models/product"
 import { THEME } from "../../../theme"
-import { numberFormat } from "../../../helpers/numberCurrency"
+import { numberFormatCurrency } from "../../../helpers/numberCurrency"
 import { useEffect, useState } from "react"
 import ProductCar from "../../ui/product_cart/product_car"
 import StyledButton from "../../ui/button/button"
@@ -43,7 +43,7 @@ const CardShop = () => {
                 <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', gap: THEME.paddings.sm }}>
                   <Text>Total:</Text>
                   <Text
-                   style={styles.price_total}>{numberFormat(totalPrice)}</Text>
+                   style={styles.price_total}>{numberFormatCurrency(totalPrice)}</Text>
                 </View>
                 <View style={{flex: 1}}>
                   <StyledButton text="Pagar ahora" onPress={continueBuying} testID="buttonBuy" />

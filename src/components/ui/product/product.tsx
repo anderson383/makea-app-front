@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, FlatList, ScrollView, Image, Button, TouchableN
 import { THEME } from "./../../../theme";
 import { SvgXml } from 'react-native-svg';
 import { IProduct } from "../../../services/models/product";
-import { numberFormat } from "../../../helpers/numberCurrency";
+import { numberFormatCurrency } from "../../../helpers/numberCurrency";
 import {HeartIcon, HeartIconActive} from "../../../../assets/icons/heart";
 
 export interface ProductProps {
@@ -20,7 +20,7 @@ const Product:React.FC<ProductProps> = ({product, onClickHeart, onClickCard}) =>
           </View>
           <View style={styles.info} >
             <View style={styles.priceContent}>
-              <Text style={styles.price}>{numberFormat(product.price)}</Text>
+              <Text style={styles.price}>{numberFormatCurrency(product.price)}</Text>
               <TouchableOpacity  onPress={onClickHeart && onClickHeart} testID="addCart">
                 { product.isAddCart ?  <SvgXml  xml={HeartIconActive()}  /> : <SvgXml  xml={HeartIcon()}  />} 
               </TouchableOpacity>

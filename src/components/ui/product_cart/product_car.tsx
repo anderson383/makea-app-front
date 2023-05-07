@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { IProduct } from "../../../services/models/product"
 import { SvgXml } from "react-native-svg"
-import { numberFormat } from "../../../helpers/numberCurrency"
+import { numberFormatCurrency } from "../../../helpers/numberCurrency"
 import { CloseIcon } from "../../../../assets/icons/close"
 import { useDispatch } from "react-redux"
 import { updateProductCarSlice } from "../../../core/redux/slices/products.slice"
@@ -30,7 +30,7 @@ const ProductCar:React.FC<ProductCarProps> = ({product}) => {
         <Text numberOfLines={2} style={styles.text}>{product.name}</Text>
         <Text numberOfLines={2}>{product.description}</Text>
       </View>
-      <Text style={styles.price}>{numberFormat(product.price)}</Text>
+      <Text style={styles.price}>{numberFormatCurrency(product.price)}</Text>
     </View>
   )
 }

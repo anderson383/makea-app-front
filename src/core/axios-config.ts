@@ -6,7 +6,12 @@ const axiosIntance = axios.create({
     Accept: 'application/json',
     'Accept-Language': 'es-CO',
     'Content-Language': 'es',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'X-XSS-Protection': '1; mode=block',
+    'X-Content-Type-Options': 'nosniff',
+    'Strict-Transport-Security': 'max-age=60',
+    'X-Frame-Options': 'SAMEORIGIN',
+    'Referrer-Policy': 'strict-origin-when-cross-origin'
   },
   timeout: 50000
 });

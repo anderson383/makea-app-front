@@ -5,7 +5,7 @@ import { THEME } from "../../../theme"
 import { useParams } from "react-router-native"
 import useProductsRepository from "../../../hooks/repositories/useProductsRepository"
 import { IProduct } from "../../../services/models/product"
-import { numberFormat } from "../../../helpers/numberCurrency"
+import { numberFormatCurrency } from "../../../helpers/numberCurrency"
 import { SvgXml } from "react-native-svg"
 import { HeartIcon, HeartIconActive } from "../../../../assets/icons/heart"
 import { updateProductCarSlice } from "../../../core/redux/slices/products.slice"
@@ -48,7 +48,7 @@ export const DetailProduct = () => {
                 </View>
               </TouchableOpacity>
               <Text style={styles.title}>{product.name}</Text>
-              <Text style={styles.price}>{numberFormat(product.price)}</Text>
+              <Text style={styles.price}>{numberFormatCurrency(product.price)}</Text>
             </View>
             <View>
               <Text>{product.description}</Text>
