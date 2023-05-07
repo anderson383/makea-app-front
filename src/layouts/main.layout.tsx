@@ -1,5 +1,5 @@
 import {NativeRouter}  from 'react-router-native'
-import NavBar from '../features/nav-bar'
+import NavBar from '../components/features/nav-bar'
 
 
 interface MainLayoutProps {

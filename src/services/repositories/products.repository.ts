@@ -1,6 +1,6 @@
 import { IProduct } from "../models/product";
 
-
 export interface ProductsRepository {
-  list (): Promise<IProduct[]>
+  list (code:string): Promise<IProduct[]>
+  get (id:string): Promise<IProduct> 
 }

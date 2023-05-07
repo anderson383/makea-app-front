@@ -2,55 +2,55 @@ import { View, Text, StyleSheet, FlatList, ScrollView, Image } from "react-nativ
 import Constants from 'expo-constants'
 import useProductsRepository from "../../../hooks/repositories/useProductsRepository"
 import { useEffect, useState } from "react"
-import { IProduct } from "@/src/services/models/product";
+import { IProduct } from "../../../services/models/product";
 import { THEME } from "./../../../theme";
-import { SvgXml } from 'react-native-svg';
-import SearchIcon from "../../../../assets/icons/search";
-import Product from "../../ui/product/product";
+import Product from "../../ui/product";
 import { useDispatch, useSelector } from "react-redux";
-import { updateProductCarSlice } from "../../../core/redux/slices/products.slice";
-import { IrootState } from "@/src/core/redux/models/root";
+import { loadProductsSlice, updateProductCarSlice } from "../../../core/redux/slices/products.slice";
+import Header from "../../ui/header";
+import { IrootState } from "../../../core/redux/models/root";
+import { useNavigate } from "react-router-native";
 
+interface ProductsProps {
+  title: string,
+  code: string
+}
 
-const Products = () => {
+const Products:React.FC<ProductsProps> = ({title, code}) => {
+  const navigation = useNavigate()
   const dispatch = useDispatch()
-  const selector = useSelector<IrootState>(state => (state.product.products))
-  const repository = useProductsRepository()
+  const productsStore = useSelector<IrootState, IProduct[]>(state => (state.product.products))
   const [products, setProducts] = useState<IProduct[]>([])
+  const repository = useProductsRepository()
 
   useEffect(() => {
-    repository.list().then(response => {
-      setProducts(response)
+    repository.list(code).then(respProd => {
+      setProducts( respProd.map(item => productsStore.find(cart => (item.id === cart.id)) || item))
     })
-  }, [])
-  
+  }, [code])
+
   const addCart = (prod: IProduct) => {
-    const mapProducts = products.map(prodItem=> prodItem.id === prod.id ? {...prodItem, isAddCart: !prodItem.isAddCart} : prodItem)
-    setProducts(mapProducts)
-    dispatch(updateProductCarSlice(prod))
+    const updateProd = {...prod, isAddCart: !prod.isAddCart }
+    
+    setProducts((lastState) => (lastState.map(prodItem => prodItem.id === prod.id ? updateProd : prodItem) ))
+    dispatch(updateProductCarSlice(updateProd))
   }
+
+  const redirectDetail = (id:string) => navigation('/detail/' + id)
 
   return (
     <>
       <View style={styles.products}>
-        <View style={styles.header}>
-          <Text style={styles.title} >Catalogo</Text>
-          <SvgXml xml={SearchIcon()} />
-        </View>
-        {/* <FlatList style={styles.list} data={products}  renderItem={({item:product}) => (
-          <View style={styles.product}>
-            <Text>Listado xd {product.name}</Text>
-          </View>
-        )}>
-        </FlatList> */}
-
+        <Header title={title}/>
         <ScrollView >
           <View style={styles.list}>
           {
             products.map((product) => (
               <Product
+                key={product.id}
                 product={product}
                 onClickHeart={() => addCart(product)}
+                onClickCard={() => redirectDetail(product.id)}
               />
             ))
           }
@@ -62,50 +62,18 @@ const Products = () => {
 }
 
 const styles = StyleSheet.create({
-  header: {
-    height: 73,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexDirection: 'row'
-  },
-  title: {
-    fontSize: 35,
-    fontWeight: THEME.fontWeights.bold
-  },
   products: {
     paddingTop: Constants.statusBarHeight,
     flex: 1,
-    padding: 16
   },
   list: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     flex: 1,
-    gap: THEME.paddings.sm
-  },
-  product: {
-    marginRight: 3,
-    borderRadius: 10,
     width: '100%',
-    maxWidth: 172,
-    overflow: 'hidden',
-    borderColor: '#f1f1f1',
-    borderWidth: 1,
+    gap: THEME.paddings.sm,
+    paddingHorizontal: THEME.paddings.md
   },
-  info: {
-    padding: 8,
-    position: 'relative',
-    gap: THEME.paddings.sm
-    // backgroundColor: 'white'
-  },
-  priceContent: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  price: {
-    color: THEME.colors.secondaryColor,
-    fontWeight: THEME.fontWeights.bold
-  }
 })
 
 export default Products

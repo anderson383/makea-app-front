@@ -1,7 +1,9 @@
 export const THEME = {
   colors: {
     primaryColor: '',
-    secondaryColor: '#FE2550'
+    secondaryColor: '#FE2550',
+    white: '#fff',
+    gray: '#E5E5E5'
   },
   paddings:{
     sm: 8,
